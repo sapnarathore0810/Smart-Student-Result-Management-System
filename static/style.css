@@ -1,0 +1,471 @@
+/*
+  Modern responsive styling for the Flask result management system.
+  The layout is designed to feel polished while staying beginner-friendly.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --bg-1: #06111f;
+  --bg-2: #13263f;
+  --card: rgba(10, 18, 30, 0.9);
+  --card-soft: rgba(255, 255, 255, 0.05);
+  --line: rgba(255, 255, 255, 0.1);
+  --text: #f6f9ff;
+  --muted: #b6c5d9;
+  --accent: #4f8cff;
+  --accent-2: #2dd4bf;
+  --accent-3: #fbbf24;
+  --danger: #fb7185;
+  --success: #34d399;
+  --shadow: 0 32px 90px rgba(0, 0, 0, 0.38);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Manrope', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(79, 140, 255, 0.22), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(45, 212, 191, 0.16), transparent 24%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 90%);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-shell {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-card,
+.panel,
+.result-card {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.hero-card {
+  max-width: 1220px;
+  padding: 30px;
+}
+
+.compact-card {
+  max-width: 980px;
+}
+
+.panel,
+.result-card {
+  padding: 22px;
+}
+
+.hero-header,
+.section-heading.compact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow,
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(79, 140, 255, 0.14);
+  color: #dce8ff;
+  border: 1px solid rgba(79, 140, 255, 0.24);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 14px 0 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+}
+
+.hero-copy {
+  margin: 0;
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.split-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.form-panel,
+.preview-panel,
+.table-section,
+.search-panel {
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--card-soft);
+}
+
+.section-heading h2,
+.section-heading p {
+  margin: 0;
+}
+
+.section-heading p {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.student-form {
+  margin-top: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #edf4ff;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(5, 10, 18, 0.78);
+  color: var(--text);
+  font: inherit;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+  color: #8ea3be;
+}
+
+input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: rgba(79, 140, 255, 0.9);
+  box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.14);
+}
+
+.button-row,
+.row-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.btn,
+.ghost-link,
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-weight: 800;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn {
+  border: none;
+  padding: 14px 18px;
+  cursor: pointer;
+}
+
+.btn:hover,
+.ghost-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.22);
+}
+
+.btn-primary {
+  color: #05111d;
+  background: linear-gradient(135deg, var(--accent-2), #8ce2ff);
+}
+
+.btn-secondary {
+  color: #eef5ff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-danger {
+  color: #fff;
+  background: linear-gradient(135deg, #fb7185, #ef4444);
+}
+
+.btn-mini {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.ghost-link {
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.form-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.preview-card,
+.message-box,
+.empty-state {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.preview-card {
+  padding: 16px;
+}
+
+.preview-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.05rem;
+}
+
+.preview-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.preview-card.accent {
+  border-color: rgba(45, 212, 191, 0.24);
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.12), rgba(79, 140, 255, 0.12));
+}
+
+.message-box {
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.message-box ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.message-box.error {
+  border-color: rgba(251, 113, 133, 0.35);
+  background: rgba(251, 113, 133, 0.12);
+  color: #ffd7df;
+}
+
+.message-box.success {
+  border-color: rgba(52, 211, 153, 0.3);
+  background: rgba(52, 211, 153, 0.12);
+  color: #d6fff1;
+}
+
+.table-section {
+  margin-top: 22px;
+  padding: 22px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: top;
+}
+
+.data-table th {
+  color: #dce8ff;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.data-table td {
+  color: #eef4ff;
+}
+
+.pill {
+  min-width: 68px;
+  padding: 7px 12px;
+  font-size: 0.82rem;
+}
+
+.grade-a,
+.status-pass {
+  background: rgba(52, 211, 153, 0.14);
+  color: #a7ffe2;
+}
+
+.grade-b {
+  background: rgba(251, 191, 36, 0.16);
+  color: #ffe7a4;
+}
+
+.grade-c,
+.status-fail {
+  background: rgba(251, 113, 133, 0.14);
+  color: #ffc0cb;
+}
+
+.empty-state {
+  padding: 18px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.site-footer {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  color: rgba(255, 255, 255, 0.86);
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer span {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 1024px) {
+  .split-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .data-table {
+    min-width: 860px;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    padding: 16px 10px;
+  }
+
+  .hero-card,
+  .panel,
+  .result-card,
+  .table-section {
+    padding: 18px 14px;
+    border-radius: 20px;
+  }
+
+  .form-grid,
+  .preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-header,
+  .section-heading.compact {
+    align-items: flex-start;
+  }
+
+  .hero-actions,
+  .button-row,
+  .row-actions {
+    flex-direction: column;
+  }
+
+  .btn,
+  .ghost-link {
+    width: 100%;
+  }
+}
