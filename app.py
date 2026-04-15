@@ -200,7 +200,7 @@ def render_home(
 
 
 @app.route("/")
-def index() -> str:
+def home() -> str:
     """Show the home page and load an edit form when requested."""
 
     edit_id = request.args.get("edit_id", type=int)
@@ -208,7 +208,7 @@ def index() -> str:
         student = fetch_student_by_id(edit_id)
         if student is None:
             flash("Student record not found.", "error")
-            return redirect(url_for("index"))
+            return redirect(url_for("home"))
 
         form_data = {
             "student_name": student["student_name"],
@@ -224,6 +224,13 @@ def index() -> str:
         return render_home(form_data=form_data, editing_student_id=student["id"])
 
     return render_home()
+
+
+@app.route("/index")
+def index() -> str:
+    """Compatibility route for existing templates that still link to index."""
+
+    return home()
 
 
 @app.route("/save", methods=["POST"])
@@ -325,7 +332,7 @@ def save_student() -> str:
         db.commit()
         flash("Student record updated successfully.", "success")
 
-    return redirect(url_for("index"))
+    return redirect(url_for("home"))
 
 
 @app.route("/delete/<int:student_id>", methods=["POST"])
@@ -336,7 +343,7 @@ def delete_student(student_id: int) -> str:
     db.execute("DELETE FROM students WHERE id = ?", (student_id,))
     db.commit()
     flash("Student record deleted successfully.", "success")
-    return redirect(url_for("index"))
+    return redirect(url_for("home"))
 
 
 @app.route("/search")
